@@ -1,0 +1,363 @@
+{
+	"info": {
+		"_postman_id": "630405b4-fbb0-4f71-8a40-48e187aaee67",
+		"name": "Centribal Shop App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10410905"
+	},
+	"item": [
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "GET ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}{{PORT}}/api/v1/products/",
+							"host": [
+								"{{URL}}{{PORT}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET PRODUCT BY ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}{{PORT}}/api/v1/products/2/",
+							"host": [
+								"{{URL}}{{PORT}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ON_STOCK",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}{{PORT}}/api/v1/products/in_stock/",
+							"host": [
+								"{{URL}}{{PORT}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"in_stock",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE PRODUCT",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Rayban Glasses\",\r\n    \"reference\": \"RB09\",\r\n    \"description\": \"Premiun leather wallets for men in 3 colors\",\r\n    \"stock\": 100,\r\n    \"currency\": \"EUR\",\r\n    \"tax_rate\": 21,\r\n    \"price_excluding_tax\": 80.00\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}{{PORT}}/api/v1/products/new/",
+							"host": [
+								"{{URL}}{{PORT}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"new",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE PRODUCT BY ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}{{PORT}}/api/v1/products/5/",
+							"host": [
+								"{{URL}}{{PORT}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"5",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE PRODUCT",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"White Umbrella\",\r\n    \"reference\": \"RF_S1\",\r\n    \"description\": \"Umbrellas stamped with 80x100 size\",\r\n    \"currency\": \"EUR\",\r\n    \"stock\": 50,\r\n    \"tax_rate\": \"21.00\",\r\n    \"price_excluding_tax\": \"22.00\",\r\n    \"price\": 21.78\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}{{PORT}}/api/v1/products/2/",
+							"host": [
+								"{{URL}}{{PORT}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE STOCK",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"White Umbrella\",\r\n    \"reference\": \"RF_S1\",\r\n    \"description\": \"Umbrellas stamped with 80x100 size\",\r\n    \"currency\": \"EUR\",\r\n    \"stock\": 50,\r\n    \"tax_rate\": \"21.00\",\r\n    \"price_excluding_tax\": \"22.00\",\r\n    \"price\": 21.78\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}{{PORT}}/api/v1/products/2/",
+							"host": [
+								"{{URL}}{{PORT}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "GET ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}{{PORT}}/api/v1/orders/",
+							"host": [
+								"{{URL}}{{PORT}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ORDER",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}{{PORT}}/api/v1/orders/36/",
+							"host": [
+								"{{URL}}{{PORT}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								"36",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE ORDER",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product\": 3,\r\n    \"quantity\": 20\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}{{PORT}}/api/v1/orders/new/",
+							"host": [
+								"{{URL}}{{PORT}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								"new",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE ORDER AS LIST",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"product\": 2,\r\n        \"quantity\": 10\r\n    },\r\n    {\r\n        \"product\": 3,\r\n        \"quantity\": 2\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}{{PORT}}/api/v1/order/new/",
+							"host": [
+								"{{URL}}{{PORT}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"order",
+								"new",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE ORDER BY ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}{{PORT}}/api/v1/orders/60/",
+							"host": [
+								"{{URL}}{{PORT}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								"60",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE ORDER BY ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product\": 3,\r\n    \"quantity\": 24\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}{{PORT}}/api/v1/orders/61/",
+							"host": [
+								"{{URL}}{{PORT}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								"61",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
