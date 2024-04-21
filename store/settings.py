@@ -82,7 +82,8 @@ DATABASES = {
         'NAME': 'centribal',
         'USER': 'root',
         'PASSWORD': 'secret',
-        'HOST': 'localhost',
+        'HOST': 'mysql',
+        #"'HOST': '172.23.0.2',
         'PORT': '3306',
     }
 }

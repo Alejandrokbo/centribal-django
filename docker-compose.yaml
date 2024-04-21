@@ -1,32 +1,55 @@
 services:
   db:
     image: mysql:latest
-    container_name: centribal-db
+    container_name: mysql
     restart: always
-    volumes:
-      - data:/var/lib/mysql
+    #healthcheck:
+    #  test: [ "CMD", "mysql", "-h", "127.0.0.1", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}", "-e", "SELECT 1" ]
+    #  timeout: 20s
+    #  retries: 10
+    ports:
+      - "3306:3306"
+
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
-    ports:
-      - "3306:3306"
-    healthcheck:
-      test: [ "CMD", "mysql", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}", "-e", "SELECT 1" ]
-      timeout: 20s
-      retries: 10
+
+    volumes:
+      - data_db:/var/lib/mysql
+
+    networks:
+      network_db:
+        aliases:
+          - mysql
+          
+    
 
   backend:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: centribal-backend
-    command: sh -c "python3 manage.py migrate --noinput && python3 manage.py collectstatic --noinput && python manage.py runserver 0.0.0.0:8000"
+    container_name: centribal-app
     restart: always
-    volumes:
-      - .:/app
+    
     ports:
       - "8000:8000"
+
     env_file:
       - .env
+
+    volumes:
+      - .:/app
+
+    networks:
+      network_db:
+        aliases:
+          - centribal-app
+
 volumes:
-  data:
+  data_db:
+
+networks:
+  network_db:
+    driver: bridge
+    name: network_db
+    
