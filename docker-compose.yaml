@@ -3,10 +3,10 @@ services:
     image: mysql:latest
     container_name: mysql
     restart: always
-    #healthcheck:
-    #  test: [ "CMD", "mysql", "-h", "127.0.0.1", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}", "-e", "SELECT 1" ]
-    #  timeout: 20s
-    #  retries: 10
+    healthcheck:
+      test: [ "CMD", "mysql", "-h", "127.0.0.1", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}", "-e", "SELECT 1" ]
+      timeout: 20s
+      retries: 10
     ports:
       - "3306:3306"
 
@@ -21,8 +21,8 @@ services:
       network_db:
         aliases:
           - mysql
-          
-    
+
+
 
   backend:
     build:
