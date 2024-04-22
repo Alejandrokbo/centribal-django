@@ -25,6 +25,10 @@ class OrderList(ListAPIView):
 def add_product_to_order(order, data):
     quantity = int(data.get('quantity'))
     product_id = data.get('product')
+
+    if quantity <= 0:
+        raise ValidationError({'quantity': f'Quantity of product \'{product_id}\' '
+                                           f'must be greater than 0'})
     try:
         product = Product.objects.get(pk=product_id)
         if product.stock < quantity:
@@ -53,19 +57,22 @@ class OrderCreate(CreateAPIView):
 
         with transaction.atomic():
             order = Order.objects.create(price=Decimal(0.00), price_with_tax=Decimal(0.00))
-
             if isinstance(data, list):
+                # I need to secure that the same product is not added twice
+                unique_products = {}
+                result_data = []
                 for item in data:
-                    if item.get('quantity') <= 0:
-                        raise ValidationError({'quantity': 'Quantity must be greater than 0'})
+                    if item.get('product') not in unique_products:
+                        unique_products[item.get('product')] = item
+                        result_data.append(item)
+                    else:
+                        # I rather raise an error than to add the sum of the quantities
+                        raise ValidationError({'product': f'Product \'{item.get("product")}\' cannot be added twice'})
+                for item in result_data:
                     add_product_to_order(order, item)
             else:
-                if data.get('quantity') <= 0:
-                    raise ValidationError({'quantity': 'Quantity must be greater than 0'})
                 add_product_to_order(order, data)
-
             order.save()
-
         return Response(OrderSerializer(order).data, status=201)
 
 

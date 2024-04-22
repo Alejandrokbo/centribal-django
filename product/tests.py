@@ -182,6 +182,24 @@ class OrderCreateTestCase(APITestCase):
         product: Product = Product.objects.filter(pk=product_4.id).first()
         self.assertEqual(product.stock, 5)
 
+    def test_create_order_with_same_product_twice(self):
+        product = Product.objects.create(name='Product 1', description='Description of product 1', reference='REF-001',
+                                         stock=10, currency='EUR', tax_rate=21.00, price_excluding_tax=100.00)
+        url = '/api/v1/orders/new/'
+        data = [
+            {
+                'product': product.id,
+                'quantity': 5
+            },
+            {
+                'product': product.id,
+                'quantity': 10
+            }
+        ]
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(Order.objects.count(), 0)
+
     def test_create_order_with_invalid_data(self):
         url = '/api/v1/orders/new/'
         data = {
