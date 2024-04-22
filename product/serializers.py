@@ -11,16 +11,10 @@ def get_day_suffix(day):
     return suffix
 
 
-class DetailedOrderSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = DetailedOrder
-        fields = 'quantity'
-        read_only_fields = 'id'
-
-
 class ProductSerializer(serializers.ModelSerializer):
     description = serializers.CharField(min_length=2, max_length=255)
     name = serializers.CharField(min_length=2, max_length=255)
+    reference = serializers.CharField(min_length=2, max_length=255, required=False)
     tax_rate = serializers.DecimalField(max_digits=5, decimal_places=2, coerce_to_string=False)
     price_excluding_tax = serializers.DecimalField(max_digits=10, decimal_places=2, coerce_to_string=False)
     price_after_taxes = serializers.DecimalField(max_digits=10, decimal_places=2, coerce_to_string=False,

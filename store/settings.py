@@ -15,11 +15,7 @@ from pathlib import Path
 from django.contrib import staticfiles
 from dotenv import load_dotenv
 
-env_path = '../.env.development'
-if os.name == 'nt':
-    env_path = '../.env.windows.development'
-
-ENV_PATH = os.path.join(os.path.dirname(__file__), env_path)
+ENV_PATH = os.path.join(os.path.dirname(__file__), '../.env.development')
 load_dotenv(dotenv_path=ENV_PATH)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -80,7 +76,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'store.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
@@ -94,7 +89,6 @@ DATABASES = {
         'PORT': os.getenv('MYSQL_PORT', '3306'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -114,7 +108,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -125,7 +118,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/

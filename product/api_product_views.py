@@ -56,18 +56,14 @@ class ProductUpdateAndDestroy(RetrieveUpdateDestroyAPIView):
     def update(self, request, *args, **kwargs):
         if 'stock' in request.path:
             product_id = kwargs.get('id')
-            product = get_object_or_404(Product, pk=product_id)
             stock = request.data.get('stock')
-            if stock < 0:
-                product.stock -= stock
-            else:
-                product.stock += stock
+            product = get_object_or_404(Product, pk=product_id)
+            product.stock += stock
             cache.set('product_data_{}'.format(product.id), {
                 'stock': product.stock,
             })
             product.save()
-            return Response({'message': 'Product stock updated successfully',
-                             'product': ProductSerializer(product).data}, status=200)
+            return Response(ProductSerializer(product).data, status=200)
         response = super().update(request, *args, **kwargs)
         if response.status_code == 200:
             product = response.data
