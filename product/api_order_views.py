@@ -95,16 +95,17 @@ class OrderUpdateAndDestroy(RetrieveUpdateDestroyAPIView):
         product = get_object_or_404(Product, id=data.get('product'))
         quantity = int(data.get('quantity'))
 
-        order_item = None
+        order_item_exists = True
         try:
             order_item = DetailedOrder.objects.get(order=order, product=product)
         except DetailedOrder.DoesNotExist:
             if quantity == 0:
                 raise ValidationError({'quantity': 'Cannot possible update quantity to 0 if product is not in order'})
-            else:
-                order_item = DetailedOrder.objects.create(order=order, product=product, quantity=0)
+            order_item_exists = False
         try:
             with transaction.atomic():
+                if not order_item_exists:
+                    order_item = DetailedOrder.objects.create(order=order, product=product, quantity=0)
                 if quantity == 0 or order_item.quantity == abs(quantity):
                     order.price -= Decimal(product.price_excluding_tax * order_item.quantity)
                     order.price_with_tax -= Decimal(product.price_after_taxes() * order_item.quantity)
@@ -112,7 +113,7 @@ class OrderUpdateAndDestroy(RetrieveUpdateDestroyAPIView):
                     product.save()
                     order_item.delete()
 
-                    cache.delete('order_data_{}'.format(order_item.id))
+                    cache.delete('detailed_order_data_{}'.format(order_item.id))
                 elif quantity > 0 or quantity < 0:
                     if quantity > product.stock:
                         raise ValidationError(f'Not enough stock of product \'id: {product.id}\' to complete order')
