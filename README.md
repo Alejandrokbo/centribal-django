@@ -45,7 +45,7 @@ docker-compose up -d
 
 ---
 ### Django app
-Once you have created the database, you need set the environment variables in the `.env.development` file. \
+Once you have created the database, you need set the environment variables in the [.env.development](.env.development) file. \
 In this case you need to access to the `local-mysql` container to get the IP address of the container. 
 * You can run the following command to get the IP address of the container:
 ```bash
@@ -63,7 +63,7 @@ pip install --no-cache-dir -r requirements.txt
 python manage.py migrate
 ```
 
-#### Now you can run the following command to create a superuser for manage the app in your browser.   
+#### `optional`  Now you can run the following command to create a superuser for manage the app in your browser.   
 - Use the following command to create the superuser
 ```bash
 python manage.py createsuperuser
