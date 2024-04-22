@@ -15,12 +15,15 @@ from pathlib import Path
 from django.contrib import staticfiles
 from dotenv import load_dotenv
 
-ENV_PATH = os.path.join(os.path.dirname(__file__), '../.env.development')
+env_path = '../.env.development'
+if os.name == 'nt':
+    env_path = '../.env.windows.development'
+
+ENV_PATH = os.path.join(os.path.dirname(__file__), env_path)
 load_dotenv(dotenv_path=ENV_PATH)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
