@@ -282,14 +282,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL}}{{PORT}}/api/v1/order/new/",
+							"raw": "{{URL}}{{PORT}}/api/v1/orders/new/",
 							"host": [
 								"{{URL}}{{PORT}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"order",
+								"orders",
 								"new",
 								""
 							]
